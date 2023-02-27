@@ -9,13 +9,7 @@
 хранения последовательности ходов используем стек или просто массив/список.
 */
 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
-}
-
-/*import java.util.*;
+import java.util.*;
 
 // Узел queue, используемый в BFS
 class Node
@@ -23,6 +17,7 @@ class Node
     // (x, y) представляет координаты шахматной доски
     // `dist` представляет минимальное расстояние от источника
     int x, y, dist;
+    Node previus;
 
     public Node(int x, int y)
     {
@@ -35,6 +30,14 @@ class Node
         this.x = x;
         this.y = y;
         this.dist = dist;
+    }
+
+    public Node(int x, int y, int dist, Node previus)
+    {
+        this.x = x;
+        this.y = y;
+        this.dist = dist;
+        this.previus = previus;
     }
 
     // Поскольку мы используем объект класса в качестве ключа в `HashMap`,
@@ -110,7 +113,7 @@ class Main
                     int y1 = y + col[i];
 
                     if (isValid(x1, y1, N)) {
-                        q.add(new Node(x1, y1, dist + 1));
+                        q.add(new Node(x1, y1, dist + 1, node));
                     }
                 }
             }
@@ -134,4 +137,4 @@ class Main
         System.out.println("The minimum number of steps required is " +
                 findShortestDistance(src, dest, N));
     }
-}*/
+}
