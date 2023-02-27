@@ -1,17 +1,18 @@
 import java.util.*;
 
-public class Formula{
-    private String preparing;
+public class Formula_x{
+    private static String preparing;
 
-    public Formula(){}
+    public Formula_x(){}
 
     public void prepare(String expression){
         preparing = expression;
     }
 
-    public Double execute(Double x, Double y){
-        preparing = preparing.replaceAll("x", String.valueOf(x));
-        preparing = preparing.replaceAll("y", String.valueOf(y));
+    public Double execute(Map<String, Double> map){
+        for (var entry : map.entrySet()){
+            preparing = preparing.replaceAll(entry.getKey(), String.valueOf(entry.getValue()));
+        }
         return evaluate(preparing);
     }
 

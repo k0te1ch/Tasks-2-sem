@@ -14,8 +14,19 @@
  */
 
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
+        ListNode list = new ListNode(Arrays.asList(
+                Arrays.asList("3", "Хехехе!"),
+                Arrays.asList("1", "111111 (2)"),
+                Arrays.asList("5", "555555 (3)"),
+                Arrays.asList("6", "666666 (4)"),
+                Arrays.asList("4", "444444 (5)"),
+                Arrays.asList("3", "333333 (6)")));
+        list.sort();
+        list.print();
     }
 }
