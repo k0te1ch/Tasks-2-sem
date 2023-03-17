@@ -11,130 +11,110 @@
 
 import java.util.*;
 
-// Узел queue, используемый в BFS
-class Node
-{
-    // (x, y) представляет координаты шахматной доски
-    // `dist` представляет минимальное расстояние от источника
-    int x, y, dist;
-    Node previus;
-
-    public Node(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public Node(int x, int y, int dist)
-    {
-        this.x = x;
-        this.y = y;
-        this.dist = dist;
-    }
-
-    public Node(int x, int y, int dist, Node previus)
-    {
-        this.x = x;
-        this.y = y;
-        this.dist = dist;
-        this.previus = previus;
-    }
-
-    // Поскольку мы используем объект класса в качестве ключа в `HashMap`,
-    // нам нужно реализовать `hashCode()` и `equals()`
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Node node = (Node) o;
-        return x == node.x &&
-                y == node.y &&
-                dist == node.dist;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y, dist);
-    }
-}
-
 class Main
 {
-    // В массивах ниже представлены все восемь возможных движений коня
-    private static int[] row = { 2, 2, -2, -2, 1, 1, -1, -1 };
-    private static int[] col = { -1, 1, 1, -1, 2, -2, 2, -2 };
-
-    // Проверяем, являются ли (x, y) действительными координатами шахматной доски.
-    // Обратите внимание, что конь не может выйти за пределы доски
+    private static final int[] row = { 2, 2, -2, -2, 1, 1, -1, -1 };
+    private static final int[] col = { -1, 1, 1, -1, 2, -2, 2, -2 };
     private static boolean isValid(int x, int y, int N) {
         return (x >= 0 && x < N) && (y >= 0 && y < N);
     }
 
-    // Находим минимальное количество шагов, которое сделал конь
-    // из источника в пункт назначения с помощью BFS
+    private static void route(Node node){
+        Node prevNode = node;
+        node = node.prev;
+        while (node != null) {
+            System.out.printf("(%s, %s) -> (%s, %s)\n", prevNode.x, prevNode.y, node.x, node.y);
+            prevNode = node;
+            node = node.prev;
+        }
+    }
     public static int findShortestDistance(Node src, Node dest, int N)
     {
-        // ставим проверять, была ли ячейка матрицы посещена раньше или нет
         Set<Node> visited = new HashSet<>();
 
-        // создаем queue и ставим в queue первый узел
         Queue<Node> q = new ArrayDeque<>();
         q.add(src);
 
-        // цикл до тех пор, пока queue не станет пустой
         while (!q.isEmpty())
         {
-            // удалить передний узел из очереди и обработать его
-            Node node = q.poll();
+            Node nodeLib = q.poll();
 
-            int x = node.x;
-            int y = node.y;
-            int dist = node.dist;
+            int x = nodeLib.x;
+            int y = nodeLib.y;
+            int dist = nodeLib.dist;
 
-            // если пункт назначения достигнут, возвращаем расстояние
             if (x == dest.x && y == dest.y) {
+                route(nodeLib);
                 return dist;
             }
 
-            // пропустить, если место было посещено раньше
-            if (!visited.contains(node))
+            if (!visited.contains(nodeLib))
             {
-                // отметить текущий узел как посещенный
-                visited.add(node);
-
-                // проверка всех восьми возможных движений коня
-                // и ставим в queue каждое допустимое движение
+                visited.add(nodeLib);
                 for (int i = 0; i < row.length; i++)
                 {
-                    // получаем действительную позицию коня из текущей позиции на
-                    // шахматная доска и поставить ее в queue с расстоянием +1
                     int x1 = x + row[i];
                     int y1 = y + col[i];
 
                     if (isValid(x1, y1, N)) {
-                        q.add(new Node(x1, y1, dist + 1, node));
+                        q.add(new Node(x1, y1, dist + 1, nodeLib));
                     }
                 }
             }
         }
 
-        // возвращаем бесконечность, если путь невозможен
+        return Integer.MAX_VALUE;
+    }
+
+    public static int findShortestDistanceCustom(Node src, Node dest, int N)
+    {
+        Set<Node> visited = new HashSet<>();
+
+        ListNode q = new ListNode();
+        q.append(src);
+
+        while (!q.isEmpty())
+        {
+            Node nodeLib = q.remove();
+
+            int x = nodeLib.x;
+            int y = nodeLib.y;
+            int dist = nodeLib.dist;
+
+            if (x == dest.x && y == dest.y) {
+                route(nodeLib);
+                return dist;
+            }
+
+            if (!visited.contains(nodeLib))
+            {
+                visited.add(nodeLib);
+                for (int i = 0; i < row.length; i++)
+                {
+                    int x1 = x + row[i];
+                    int y1 = y + col[i];
+
+                    if (isValid(x1, y1, N)) {
+                        q.append(new Node(x1, y1, dist + 1, nodeLib));
+                    }
+                }
+            }
+        }
+
         return Integer.MAX_VALUE;
     }
 
     public static void main(String[] args)
     {
-        // Матрица N x N
-        int N = 8;
-
-        // исходные координаты
         Node src = new Node(0, 7);
+        Node to = new Node(7, 0);
+        System.out.println("Минимум шагов: " + findShortestDistance(src, to, 8));
+        System.out.println();
+        System.out.println("Минимум шагов 2: " + findShortestDistanceCustom(src, to, 8));
 
-        // координаты пункта назначения
-        Node dest = new Node(7, 0);
-
-        System.out.println("The minimum number of steps required is " +
-                findShortestDistance(src, dest, N));
+        System.out.println();
+        src = new Node(7, 7);
+        to = new Node(0, 7);
+        System.out.println("Минимум шагов: " + findShortestDistanceCustom(src, to, 8));
     }
 }
