@@ -11,13 +11,6 @@ class Node
         this.y = y;
     }
 
-    public Node(int x, int y, int dist)
-    {
-        this.x = x;
-        this.y = y;
-        this.dist = dist;
-    }
-
     public Node(int x, int y, int dist, Node prev)
     {
         this.x = x;
@@ -25,9 +18,6 @@ class Node
         this.dist = dist;
         this.prev = prev;
     }
-
-    // Поскольку мы используем объект класса в качестве ключа в "HashMap",
-    // нам нужно реализовать "hashCode()" и "equals()"
 
     @Override
     public boolean equals(Object o) {

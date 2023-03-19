@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class ListNode {
     private ListItem head;
     private ListItem tail;
