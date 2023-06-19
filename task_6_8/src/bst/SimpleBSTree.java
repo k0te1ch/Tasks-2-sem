@@ -1,28 +1,13 @@
 package bst;
 
 import java.util.function.Function;
-import bst.SimpleBinaryTree;
-import bst.BinaryTree;
 
 /**
  * Класс, реализующий простое (наивное) дерево поиска
+ *
  * @param <T>
  */
 public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryTree<T> implements BSTree<T> {
-
-    private static class CheckBSTResult<T> {
-        public boolean result;
-        public int size;
-        public T min;
-        public T max;
-
-        public CheckBSTResult(boolean result, int size, T min, T max) {
-            this.result = result;
-            this.size = size;
-            this.min = min;
-            this.max = max;
-        }
-    }
 
     int size = 0;
 
@@ -63,6 +48,7 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
 
     /**
      * Проверка, является ли поддерево деревом поиска
+     *
      * @param <T>
      * @param node Поддерево
      * @return treu/false
@@ -73,6 +59,7 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
 
     /**
      * Загрузка дерева из скобочного представления
+     *
      * @param bracketStr
      * @throws Exception Если переаддное скобочное представление не является деревом поиска
      */
@@ -91,8 +78,8 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
     /**
      * Рекурсивное добавление значения в поддерево node
      *
-     * @param node Узел, в который (в него или его поддеревья) добавляем
-     * значение value
+     * @param node  Узел, в который (в него или его поддеревья) добавляем
+     *              значение value
      * @param value Добавляемое значение
      * @return Старое значение, равное value, если есть
      */
@@ -132,8 +119,7 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
      * @param value
      * @return Старое значение, равное value, если есть
      */
-    private T remove(SimpleTreeNode node, SimpleTreeNode nodeParent, T value)
-    {
+    private T remove(SimpleTreeNode node, SimpleTreeNode nodeParent, T value) {
         if (node == null) {
             return null;
         }
@@ -188,8 +174,6 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
         return parent;
     }
 
-    // Реализация BSTree<T>
-
     @Override
     public T put(T value) {
         if (root == null) {
@@ -200,6 +184,8 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
         return put(root, value);
     }
 
+    // Реализация BSTree<T>
+
     @Override
     public T remove(T value) {
         return remove(root, null, value);
@@ -208,6 +194,20 @@ public class SimpleBSTree<T extends Comparable<? super T>> extends SimpleBinaryT
     @Override
     public int size() {
         return size;
+    }
+
+    private static class CheckBSTResult<T> {
+        public boolean result;
+        public int size;
+        public T min;
+        public T max;
+
+        public CheckBSTResult(boolean result, int size, T min, T max) {
+            this.result = result;
+            this.size = size;
+            this.min = min;
+            this.max = max;
+        }
     }
 
 }

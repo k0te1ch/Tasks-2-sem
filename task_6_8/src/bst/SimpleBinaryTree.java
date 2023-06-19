@@ -7,42 +7,9 @@ import java.util.function.Function;
  */
 public class SimpleBinaryTree<T> implements BinaryTree<T> {
 
-    protected class SimpleTreeNode implements BinaryTree.TreeNode<T> {
-        public T value;
-        public SimpleTreeNode left;
-        public SimpleTreeNode right;
-
-        public SimpleTreeNode(T value, SimpleTreeNode left, SimpleTreeNode right) {
-            this.value = value;
-            this.left = left;
-            this.right = right;
-        }
-
-        public SimpleTreeNode(T value) {
-            this(value, null, null);
-        }
-
-        @Override
-        public T getValue() {
-            return value;
-        }
-
-        @Override
-        public TreeNode<T> getLeft() {
-            return left;
-        }
-
-        @Override
-        public TreeNode<T> getRight() {
-            return right;
-        }
-    }
-
     protected SimpleTreeNode root = null;
-
     protected Function<String, T> fromStrFunc;
     protected Function<T, String> toStrFunc;
-
     public SimpleBinaryTree(Function<String, T> fromStrFunc, Function<T, String> toStrFunc) {
         this.fromStrFunc = fromStrFunc;
         this.toStrFunc = toStrFunc;
@@ -79,10 +46,6 @@ public class SimpleBinaryTree<T> implements BinaryTree<T> {
         return fromStrFunc.apply(s);
     }
 
-    private static class IndexWrapper {
-        public int index = 0;
-    }
-
     private void skipSpaces(String bracketStr, IndexWrapper iw) {
         while (iw.index < bracketStr.length() && Character.isWhitespace(bracketStr.charAt(iw.index))) {
             iw.index++;
@@ -101,9 +64,9 @@ public class SimpleBinaryTree<T> implements BinaryTree<T> {
             iw.index++;
         }
         while (iw.index < bracketStr.length() && (
-                    quote && bracketStr.charAt(iw.index) != '"' ||
-                    !quote && !Character.isWhitespace(bracketStr.charAt(iw.index)) && "(),".indexOf(bracketStr.charAt(iw.index)) < 0
-               )) {
+                quote && bracketStr.charAt(iw.index) != '"' ||
+                        !quote && !Character.isWhitespace(bracketStr.charAt(iw.index)) && "(),".indexOf(bracketStr.charAt(iw.index)) < 0
+        )) {
             iw.index++;
         }
         if (quote && bracketStr.charAt(iw.index) == '"') {
@@ -149,5 +112,40 @@ public class SimpleBinaryTree<T> implements BinaryTree<T> {
             throw new Exception(String.format("Ожидался конец строки [%d]", iw.index));
         }
         this.root = root;
+    }
+
+    private static class IndexWrapper {
+        public int index = 0;
+    }
+
+    protected class SimpleTreeNode implements BinaryTree.TreeNode<T> {
+        public T value;
+        public SimpleTreeNode left;
+        public SimpleTreeNode right;
+
+        public SimpleTreeNode(T value, SimpleTreeNode left, SimpleTreeNode right) {
+            this.value = value;
+            this.left = left;
+            this.right = right;
+        }
+
+        public SimpleTreeNode(T value) {
+            this(value, null, null);
+        }
+
+        @Override
+        public T getValue() {
+            return value;
+        }
+
+        @Override
+        public TreeNode<T> getLeft() {
+            return left;
+        }
+
+        @Override
+        public TreeNode<T> getRight() {
+            return right;
+        }
     }
 }

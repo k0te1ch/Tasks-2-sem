@@ -5,13 +5,13 @@ public class ListNode {
     private ListItem tail = null;
     private int len = 0;
 
-    public ListNode(List<List<String>> info){
-        for (List<String> i: info){
+    public ListNode(List<List<String>> info) {
+        for (List<String> i : info) {
             append(new ListItem(i, len));
         }
     }
 
-    public void append(ListItem item){
+    public void append(ListItem item) {
         if (head == null) {
             head = item;
         } else {
@@ -48,10 +48,10 @@ public class ListNode {
         }
     }*/
 
-    private void indexes(){
+    private void indexes() {
         ListItem item = head;
         int i = 0;
-        while (item != null){
+        while (item != null) {
             item.setIndex(i);
             i++;
             item = item.getNext();
@@ -59,30 +59,30 @@ public class ListNode {
     }
 
 
-    private void swap(ListItem item1, ListItem item2){
+    private void swap(ListItem item1, ListItem item2) {
         int index1 = item1.getIndex();
         int index2 = item2.getIndex();
         if (index1 - index2 == 0) return;
-        if (index1 - index2 == 1){
+        if (index1 - index2 == 1) {
             item2.setNext(item1.getNext());
-            if (item2.getNext() != null){
+            if (item2.getNext() != null) {
                 item2.getNext().setPrev(item2);
             }
             item1.setPrev(item2.getPrev());
             item1.setNext(item2);
             item2.setPrev(item1);
-            if (item1.getPrev() != null){
+            if (item1.getPrev() != null) {
                 item1.getPrev().setNext(item1);
             }
-        } else if (index2 - index1 == 1){
+        } else if (index2 - index1 == 1) {
             item1.setNext(item2.getNext());
-            if (item1.getNext() != null){
+            if (item1.getNext() != null) {
                 item1.getNext().setPrev(item1);
             }
             item2.setPrev(item1.getPrev());
             item2.setNext(item1);
             item1.setPrev(item2);
-            if (item2.getPrev() != null){
+            if (item2.getPrev() != null) {
                 item2.getPrev().setNext(item2);
             }
         } else {
@@ -92,43 +92,45 @@ public class ListNode {
             temp = item1.getPrev();
             item1.setPrev(item2.getPrev());
             item2.setPrev(temp);
-            if (item2.getPrev() != null){
+            if (item2.getPrev() != null) {
                 item2.getPrev().setNext(item2);
             }
-            if (item1.getPrev() != null){
+            if (item1.getPrev() != null) {
                 item1.getPrev().setNext(item1);
             }
-            if (item1.getNext() != null){
+            if (item1.getNext() != null) {
                 item1.getNext().setPrev(item1);
             }
-            if (item2.getNext() != null){
+            if (item2.getNext() != null) {
                 item2.getNext().setPrev(item2);
             }
         }
-        if (index1 == 0){
+        if (index1 == 0) {
             head = item2;
-        } if (index2 == 0){
+        }
+        if (index2 == 0) {
             head = item1;
         }
-        if (index1 == len-1){
+        if (index1 == len - 1) {
             tail = item2;
-        } if (index2 == len-1){
+        }
+        if (index2 == len - 1) {
             tail = item1;
         }
         indexes();
     }
 
-    private ListItem cursor(int index){
-        if (index >= 0 && index < len){
+    private ListItem cursor(int index) {
+        if (index >= 0 && index < len) {
             ListItem item;
-            if (len/2 <= index){
+            if (len / 2 <= index) {
                 item = tail;
-                for (int i = len-1; i > index; i--){
+                for (int i = len - 1; i > index; i--) {
                     item = item.getPrev();
                 }
             } else {
                 item = head;
-                for (int i = 0; i < index; i++){
+                for (int i = 0; i < index; i++) {
                     item = item.getNext();
                 }
             }
@@ -150,9 +152,9 @@ public class ListNode {
         return null;
     }*/
 
-    public void sort(){
+    public void sort() {
         ListItem item1, item2, item3;
-        for (int i = 0; i < len-1; i++) {
+        for (int i = 0; i < len - 1; i++) {
             item3 = cursor(i);
             if (item3 == null || !item3.hasNext()) break;
             item1 = item3;
@@ -161,19 +163,19 @@ public class ListNode {
                 if (item2.getCourse() < item1.getCourse()) {
                     item1 = item2;
                 }
-                if (j+1 != len) item2 = item2.getNext();
+                if (j + 1 != len) item2 = item2.getNext();
             }
 
             swap(item3, item1);
         }
     }
 
-    public void print(){
+    public void print() {
         System.out.println("{");
         ListItem item = head;
         for (int i = 0; i < len; i++) {
             String s = String.format(" %s курс <-> %s,", item.getCourse(), item.getFio());
-            if (i+1 == len) s = s.substring(0, s.length()-1);
+            if (i + 1 == len) s = s.substring(0, s.length() - 1);
             System.out.println(s);
             item = item.getNext();
         }

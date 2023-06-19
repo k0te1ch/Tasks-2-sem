@@ -1,12 +1,10 @@
 package bst;
 
-import bst.BinaryTree;
-
 public class BSTreeAlgorithms {
     /**
      * Поиск TreeNode по значению в поддереве node
      *
-     * @param node Узел дерева
+     * @param node  Узел дерева
      * @param value Значение для поиска
      * @return Узел, содержащий искомый элемент
      */
@@ -81,7 +79,7 @@ public class BSTreeAlgorithms {
      * Поиск TreeNode с наибольшим значением, меньшим или равным value, в
      * поддереве node
      *
-     * @param node Узел дерева
+     * @param node  Узел дерева
      * @param value Параметр
      * @return Узел, содержащий искомый элемент
      */
@@ -104,7 +102,7 @@ public class BSTreeAlgorithms {
      * Поиск TreeNode с наименьшим значением, большим или равным value, в
      * поддереве node
      *
-     * @param node Узел дерева
+     * @param node  Узел дерева
      * @param value Параметр
      * @return Узел, содержащий искомый элемент
      */

@@ -7,5 +7,30 @@
     </content>
     <orderEntry type="jdk" jdkName="18" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="guru.nidi.graphviz.java" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jfreesvg-3.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/jfreesvg-3.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="axsl.w3c.dom.svg.java" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.bridge" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.dom" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.dom.svg" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.util" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.xml" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.svggen" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.ext.awt" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.css" level="project" />
+    <orderEntry type="library" name="apache.xerces.xercesImpl" level="project" />
+    <orderEntry type="library" name="apache.cassandra.all" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.apache.batik.parser" level="project" />
+    <orderEntry type="library" name="eclipse.birt.runtime.3_7_1.w3c.css.sac" level="project" />
   </component>
 </module>

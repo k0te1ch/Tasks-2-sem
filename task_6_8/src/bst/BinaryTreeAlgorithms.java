@@ -7,24 +7,12 @@ import java.util.Stack;
 
 public class BinaryTreeAlgorithms {
 
-    @FunctionalInterface
-    public interface Visitor<T> {
-        /**
-         * "Посещение" значения
-         *
-         * @param value Значение, которое "посещаем"
-         * @param level Уровень дерева/поддерева, на котором находится данное значение
-         */
-        void visit(T value, int level);
-    }
-
-
     /**
      * Обход поддерева с вершиной в данном узле
      * "посетителем" в прямом/NLR порядке - рекурсивная реализация
      *
      * @param treeNode Узел поддерева, которое требуется "обойти"
-     * @param visitor Посетитель
+     * @param visitor  Посетитель
      */
     public static <T> void preOrderVisit(BinaryTree.TreeNode<T> treeNode, Visitor<T> visitor) {
         // данный класс нужен только для того, чтобы "спрятать" его метод (c 3-мя параметрами)
@@ -82,7 +70,7 @@ public class BinaryTreeAlgorithms {
      * "посетителем" в симметричном/поперечном/центрированном/LNR порядке - рекурсивная реализация
      *
      * @param treeNode Узел поддерева, которое требуется "обойти"
-     * @param visitor Посетитель
+     * @param visitor  Посетитель
      */
     public static <T> void inOrderVisit(BinaryTree.TreeNode<T> treeNode, Visitor<T> visitor) {
         // данный класс нужен только для того, чтобы "спрятать" его метод (c 3-мя параметрами)
@@ -145,7 +133,7 @@ public class BinaryTreeAlgorithms {
      * "посетителем" в обратном/LRN порядке - рекурсивная реализация
      *
      * @param treeNode Узел поддерева, которое требуется "обойти"
-     * @param visitor Посетитель
+     * @param visitor  Посетитель
      */
     public static <T> void postOrderVisit(BinaryTree.TreeNode<T> treeNode, Visitor<T> visitor) {
         // данный класс нужен только для того, чтобы "спрятать" его метод (c 3-мя параметрами)
@@ -206,28 +194,11 @@ public class BinaryTreeAlgorithms {
         };
     }
 
-
-    /**
-     *  Класс для хранения узла дерева вместе с его уровнем, нужен для методов
-     *  {@link #byLevelVisit(BinaryTree.TreeNode, Visitor)} и {@link #byLevelValues(BinaryTree.TreeNode)}
-     *
-     * @param <T>
-     */
-    private static class QueueItem<T> {
-        public BinaryTree.TreeNode<T> node;
-        public int level;
-
-        public QueueItem(BinaryTree.TreeNode<T> node, int level) {
-            this.node = node;
-            this.level = level;
-        }
-    }
-
     /**
      * Обход поддерева с вершиной в данном узле "посетителем" по уровням (обход в ширину)
      *
      * @param treeNode Узел поддерева, которое требуется "обойти"
-     * @param visitor Посетитель
+     * @param visitor  Посетитель
      */
     public static <T> void byLevelVisit(BinaryTree.TreeNode<T> treeNode, Visitor<T> visitor) {
         Queue<QueueItem<T>> queue = new LinkedList<>();
@@ -281,7 +252,6 @@ public class BinaryTreeAlgorithms {
         };
     }
 
-
     /**
      * Представление дерева в виде строки в скобочной нотации
      *
@@ -312,5 +282,32 @@ public class BinaryTreeAlgorithms {
         new Inner().printTo(treeNode, sb);
 
         return sb.toString();
+    }
+
+    @FunctionalInterface
+    public interface Visitor<T> {
+        /**
+         * "Посещение" значения
+         *
+         * @param value Значение, которое "посещаем"
+         * @param level Уровень дерева/поддерева, на котором находится данное значение
+         */
+        void visit(T value, int level);
+    }
+
+    /**
+     * Класс для хранения узла дерева вместе с его уровнем, нужен для методов
+     * {@link #byLevelVisit(BinaryTree.TreeNode, Visitor)} и {@link #byLevelValues(BinaryTree.TreeNode)}
+     *
+     * @param <T>
+     */
+    private static class QueueItem<T> {
+        public BinaryTree.TreeNode<T> node;
+        public int level;
+
+        public QueueItem(BinaryTree.TreeNode<T> node, int level) {
+            this.node = node;
+            this.level = level;
+        }
     }
 }

@@ -1,8 +1,5 @@
 package bst;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Реализация словаря на базе простого (наивного) дерева поиска
  *
@@ -21,11 +18,11 @@ public class SimpleBSTreeMap<K extends Comparable<K>, V> implements BSTreeMap<K,
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder("{");
-        for (MapTreeEntry<K, V> i: BinaryTreeAlgorithms.preOrderValues(tree.getRoot())){
+        for (MapTreeEntry<K, V> i : BinaryTreeAlgorithms.preOrderValues(tree.getRoot())) {
             res.append(i.toString());
             res.append(", ");
         }
-        res.delete(res.length()-2, res.length());
+        res.delete(res.length() - 2, res.length());
         return res.toString() + "}";
     }
 }

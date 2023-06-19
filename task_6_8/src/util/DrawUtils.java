@@ -8,12 +8,13 @@ import java.awt.geom.Rectangle2D;
 public class DrawUtils {
     /**
      * Рисование строки в центре прямоугольника (x, y, width, height).
-     * @param gr - Экземпляр <code>Graphics</code> для рисования
-     * @param font - Шрифт для рисования
-     * @param s - Строка, которую надо нарисовать
-     * @param x - Координата x верхнего левого угла прямоугольника
-     * @param y - Координата y верхнего левого угла прямоугольника
-     * @param width - Ширина прямоугольника
+     *
+     * @param gr     - Экземпляр <code>Graphics</code> для рисования
+     * @param font   - Шрифт для рисования
+     * @param s      - Строка, которую надо нарисовать
+     * @param x      - Координата x верхнего левого угла прямоугольника
+     * @param y      - Координата y верхнего левого угла прямоугольника
+     * @param width  - Ширина прямоугольника
      * @param height - Высота прямоугольника
      * @see Graphics
      */
@@ -35,10 +36,11 @@ public class DrawUtils {
 
     /**
      * Рисование строки в центре прямоугольника (x, y, width, height).
-     * @param gr Экземпляр <code>Graphics</code> для рисования
+     *
+     * @param gr   Экземпляр <code>Graphics</code> для рисования
      * @param font Шрифт для рисования
-     * @param s Строка, которую надо нарисовать
-     * @param r Прямоугольник
+     * @param s    Строка, которую надо нарисовать
+     * @param r    Прямоугольник
      * @see Graphics
      * @see Rectangle
      */
@@ -49,6 +51,7 @@ public class DrawUtils {
 
     /**
      * Возвращает контрастный цвет (белый или черный) к переданному цвету
+     *
      * @param color Цвет
      * @return Контрастный цвет
      */

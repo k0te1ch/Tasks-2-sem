@@ -1,19 +1,9 @@
 import java.util.*;
 
-public class Formula_x{
+public class Formula_x {
     private static String preparing;
 
-    public Formula_x(){}
-
-    public void prepare(String expression){
-        preparing = expression;
-    }
-
-    public Double execute(Map<String, Double> map){
-        for (var entry : map.entrySet()){
-            preparing = preparing.replaceAll(entry.getKey(), String.valueOf(entry.getValue()));
-        }
-        return evaluate(preparing);
+    public Formula_x() {
     }
 
     private static Double evaluate(String expression) {
@@ -23,30 +13,30 @@ public class Formula_x{
         int start = 0;
         StringBuilder str = new StringBuilder();
         boolean first = true;
-        for (int i = 0; i < strList.size(); i++){
+        for (int i = 0; i < strList.size(); i++) {
             char ch = strList.get(i).charAt(0);
-            if (Character.isDigit(ch) || (start == i && ch == '-' && first)){
+            if (Character.isDigit(ch) || (start == i && ch == '-' && first)) {
                 str.append(ch);
                 if (start == i && ch == '-') first = false;
-            } else if (ch == '.'){
+            } else if (ch == '.') {
                 str.append('.');
-            } else if (str.length() > 1){
+            } else if (str.length() > 1) {
                 strList.add(start, str.toString());
-                for (int d = start; d < i; d++){
-                    strList.remove(start+1);
+                for (int d = start; d < i; d++) {
+                    strList.remove(start + 1);
                 }
                 i = start;
-                start = i+1;
+                start = i + 1;
                 str = new StringBuilder();
             } else {
                 str = new StringBuilder();
-                start = i+1;
+                start = i + 1;
             }
         }
-        if (str.length() > 1){
+        if (str.length() > 1) {
             strList.add(start, str.toString());
-            for (int d = 0; d < str.length(); d++){
-                strList.remove(start+1);
+            for (int d = 0; d < str.length(); d++) {
+                strList.remove(start + 1);
             }
         }
 
@@ -69,7 +59,7 @@ public class Formula_x{
                     for (int j = strList.indexOf("(") + 1; j < i; j++) {
                         recursion2.append(strList.get(j));
                     }
-                    String test2 = expression.substring(expression.indexOf("("), expression.lastIndexOf(")")+1);
+                    String test2 = expression.substring(expression.indexOf("("), expression.lastIndexOf(")") + 1);
                     String testRecursion2 = String.valueOf(evaluate(recursion2.toString()));
                     expression = expression.replace(test2, testRecursion2);
                     strList = new ArrayList<>();
@@ -82,30 +72,30 @@ public class Formula_x{
         start = 0;
         str = new StringBuilder();
         first = true;
-        for (int i = 0; i < StringList2.size(); i++){
+        for (int i = 0; i < StringList2.size(); i++) {
             char ch = StringList2.get(i).charAt(0);
-            if (Character.isDigit(ch) || (start == i && ch == '-' && first)){
+            if (Character.isDigit(ch) || (start == i && ch == '-' && first)) {
                 str.append(ch);
                 if (start == i && ch == '-') first = false;
-            } else if (ch == '.'){
+            } else if (ch == '.') {
                 str.append('.');
-            } else if (str.length() > 1){
+            } else if (str.length() > 1) {
                 StringList2.add(start, str.toString());
-                for (int d = start; d < i; d++){
-                    StringList2.remove(start+1);
+                for (int d = start; d < i; d++) {
+                    StringList2.remove(start + 1);
                 }
                 i = start;
-                start = i+1;
+                start = i + 1;
                 str = new StringBuilder();
             } else {
                 str = new StringBuilder();
-                start = i+1;
+                start = i + 1;
             }
         }
-        if (str.length() > 1){
+        if (str.length() > 1) {
             StringList2.add(start, str.toString());
-            for (int d = 0; d < str.length(); d++){
-                StringList2.remove(start+1);
+            for (int d = 0; d < str.length(); d++) {
+                StringList2.remove(start + 1);
             }
         }
 
@@ -120,16 +110,14 @@ public class Formula_x{
                 StringList2.remove(index + 2);
                 StringList2.remove(index + 1);
                 StringList2.remove(index);
-            }
-            else if (StringList2.contains("*")) {
+            } else if (StringList2.contains("*")) {
                 int index = StringList2.indexOf("*");
                 result = Double.parseDouble(StringList2.get(index - 1)) * Double.parseDouble(StringList2.get(index + 1));
                 StringList2.add(index - 1, String.valueOf(result));
                 StringList2.remove(index + 2);
                 StringList2.remove(index + 1);
                 StringList2.remove(index);
-            }
-            else if (StringList2.contains("-")) {
+            } else if (StringList2.contains("-")) {
                 int index = StringList2.indexOf("-");
                 int lastIndex = StringList2.lastIndexOf("-");
                 if (index == 0) {
@@ -137,23 +125,20 @@ public class Formula_x{
                     StringList2.add(0, String.valueOf(result));
                     StringList2.remove(2);
                     StringList2.remove(1);
-                }
-                else if ((lastIndex-2>0) && (StringList2.get(lastIndex-2).equals("-"))){
+                } else if ((lastIndex - 2 > 0) && (StringList2.get(lastIndex - 2).equals("-"))) {
                     result = Double.parseDouble(StringList2.get(lastIndex + 1)) + Double.parseDouble(StringList2.get(lastIndex - 1));
                     StringList2.add(lastIndex - 1, String.valueOf(result));
                     StringList2.remove(lastIndex + 2);
                     StringList2.remove(lastIndex + 1);
                     StringList2.remove(lastIndex);
-                }
-                else {
+                } else {
                     result = Double.parseDouble(StringList2.get(index - 1)) - Double.parseDouble(StringList2.get(index + 1));
                     StringList2.add(index - 1, String.valueOf(result));
                     StringList2.remove(index + 2);
                     StringList2.remove(index + 1);
                     StringList2.remove(index);
                 }
-            }
-            else if (StringList2.contains("+")) {
+            } else if (StringList2.contains("+")) {
                 int index = StringList2.indexOf("+");
                 result = Double.parseDouble(StringList2.get(index - 1)) + Double.parseDouble(StringList2.get(index + 1));
                 StringList2.add(index - 1, String.valueOf(result));
@@ -162,7 +147,7 @@ public class Formula_x{
                 StringList2.remove(index);
             }
 
-            if (StringList2.size() == 1){
+            if (StringList2.size() == 1) {
                 result = Double.parseDouble(StringList2.get(0));
             }
 
@@ -171,5 +156,16 @@ public class Formula_x{
             }
         }
         return (double) 0;
+    }
+
+    public void prepare(String expression) {
+        preparing = expression;
+    }
+
+    public Double execute(Map<String, Double> map) {
+        for (var entry : map.entrySet()) {
+            preparing = preparing.replaceAll(entry.getKey(), String.valueOf(entry.getValue()));
+        }
+        return evaluate(preparing);
     }
 }

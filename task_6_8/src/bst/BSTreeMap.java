@@ -1,12 +1,13 @@
 package bst;
 
+import util.dummy.DefaultNotSupportedCollection;
+import util.dummy.DefaultNotSupportedSet;
+import util.dummy.DefaultNotSupportedSortedMap;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import util.dummy.DefaultNotSupportedCollection;
-import util.dummy.DefaultNotSupportedSet;
-import util.dummy.DefaultNotSupportedSortedMap;
 
 /**
  * Интерфейс словаря на базе двоичного дерева поиска (BinarySearchTree) с
@@ -16,44 +17,6 @@ import util.dummy.DefaultNotSupportedSortedMap;
  * @param <V>
  */
 public interface BSTreeMap<K extends Comparable<? super K>, V> extends DefaultNotSupportedSortedMap<K, V> {
-
-    class MapTreeEntry<K extends Comparable<? super K>, V> implements Map.Entry<K, V>, Comparable<MapTreeEntry<K, V>> {
-
-        public K key;
-        public V value;
-
-        public MapTreeEntry(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        @Override
-        public int compareTo(MapTreeEntry<K, V> o) {
-            return this.key.compareTo(o.key);
-        }
-
-        @Override
-        public K getKey() {
-            return key;
-        }
-
-        @Override
-        public V getValue() {
-            return value;
-        }
-
-        @Override
-        public V setValue(V value) {
-            V oldValue = this.value;
-            this.value = value;
-            return oldValue;
-        }
-
-        @Override
-        public String toString() {
-            return key + "=" + value;
-        }
-    }
 
     BSTree<MapTreeEntry<K, V>> getTree();
 
@@ -187,5 +150,43 @@ public interface BSTreeMap<K extends Comparable<? super K>, V> extends DefaultNo
 
             // надо будет потом реализовать остальные методы
         };
+    }
+
+    class MapTreeEntry<K extends Comparable<? super K>, V> implements Map.Entry<K, V>, Comparable<MapTreeEntry<K, V>> {
+
+        public K key;
+        public V value;
+
+        public MapTreeEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        @Override
+        public int compareTo(MapTreeEntry<K, V> o) {
+            return this.key.compareTo(o.key);
+        }
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public V getValue() {
+            return value;
+        }
+
+        @Override
+        public V setValue(V value) {
+            V oldValue = this.value;
+            this.value = value;
+            return oldValue;
+        }
+
+        @Override
+        public String toString() {
+            return key + "=" + value;
+        }
     }
 }

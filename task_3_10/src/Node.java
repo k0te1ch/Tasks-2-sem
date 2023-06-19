@@ -1,18 +1,15 @@
 import java.util.Objects;
 
-class Node
-{
+class Node {
     int x, y, dist;
     Node prev;
 
-    public Node(int x, int y)
-    {
+    public Node(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Node(int x, int y, int dist, Node prev)
-    {
+    public Node(int x, int y, int dist, Node prev) {
         this.x = x;
         this.y = y;
         this.dist = dist;

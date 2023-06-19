@@ -6,27 +6,18 @@ import java.util.Objects;
 class Tree {
     private Node root;
 
-    public Tree(String path){
+    public Tree(String path) {
         root = new Node(path);
-    }
-
-    static class Node{
-        private final File file;
-        private final List<Node> files = new ArrayList<>();
-
-        public Node(String path){
-            file = new File(path);
-        }
     }
 
     public Node getRoot() {
         return root;
     }
 
-    public Node insert(Node node, String path){
+    public Node insert(Node node, String path) {
         if (new File(path).isFile()) return new Node(path);
 
-        for (File i: Objects.requireNonNull(new File(path).listFiles())){
+        for (File i : Objects.requireNonNull(new File(path).listFiles())) {
             String pathNew = i.getPath();
             if (new File(pathNew).isDirectory()) node.files.add(insert(new Node(pathNew), pathNew));
             else node.files.add(insert(node, pathNew));
@@ -34,30 +25,39 @@ class Tree {
         return node;
     }
 
-    public void print(Node node, int level){
+    public void print(Node node, int level) {
         System.out.printf("%s%s\n", new String(new char[level]).replace("\0", "\t"), node.file.getPath());
-        for (Node i: node.files){
-            print(i, level+1);
+        for (Node i : node.files) {
+            print(i, level + 1);
         }
     }
 
-    public List<File> find(Node node, String name){
+    public List<File> find(Node node, String name) {
         List<File> tmp = new ArrayList<>();
 
         String[] tmp1 = name.split("\\.");
-        String fileExt = tmp1.length > 1 ? tmp1[tmp1.length-1] : "";
+        String fileExt = tmp1.length > 1 ? tmp1[tmp1.length - 1] : "";
         String fileName = name.substring(0, name.length() - fileExt.length() - 1);
         String name2 = node.file.getName();
         String[] tmp2 = name2.split("\\.");
-        String fileExt2 = tmp2.length > 1 ? tmp2[tmp2.length-1] : "";
+        String fileExt2 = tmp2.length > 1 ? tmp2[tmp2.length - 1] : "";
         String fileName2 = name2.substring(0, name2.length() - fileExt2.length() - 1);
         if (fileName2.contains(fileName) && fileExt2.contains(fileExt))
             tmp.add(node.file);
 
 
-        for (Node i: node.files) tmp.addAll(find(i, name));
+        for (Node i : node.files) tmp.addAll(find(i, name));
 
         return tmp;
+    }
+
+    static class Node {
+        private final File file;
+        private final List<Node> files = new ArrayList<>();
+
+        public Node(String path) {
+            file = new File(path);
+        }
     }
 }
 

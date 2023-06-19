@@ -2,11 +2,11 @@ public class ListItem {
     private final Node data;
     private ListItem next;
 
-    public ListItem(Node data){
+    public ListItem(Node data) {
         this.data = data;
     }
 
-    public Node getData(){
+    public Node getData() {
         return data;
     }
 

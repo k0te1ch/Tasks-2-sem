@@ -30,19 +30,22 @@ public class Main {
 
         f.prepare("x      /y");
         s = new HashMap<>();
-        s.put("x", 10d); s.put("y", 5d);
+        s.put("x", 10d);
+        s.put("y", 5d);
         System.out.println(f.execute(s)); // 2
 
 
         f.prepare("x        /  (  -y)        ");
         s = new HashMap<>();
-        s.put("x", 10d); s.put("y", 5d);
+        s.put("x", 10d);
+        s.put("y", 5d);
         System.out.println(f.execute(s)); // -2
 
 
         f.prepare("x    /y");
         s = new HashMap<>();
-        s.put("x", 10.10); s.put("y", 5d);
+        s.put("x", 10.10);
+        s.put("y", 5d);
         System.out.println(f.execute(s)); // 2.02
 
 
@@ -60,31 +63,37 @@ public class Main {
 
         f.prepare("z/y*x");
         s = new HashMap<>();
-        s.put("x", 5d); s.put("y", 0d); s.put("z", 25d);
+        s.put("x", 5d);
+        s.put("y", 0d);
+        s.put("z", 25d);
         System.out.println(f.execute(s)); // inf
 
 
         f.prepare("x*x/x*(-y)");
         s = new HashMap<>();
-        s.put("x", 25d); s.put("y", 1d);
+        s.put("x", 25d);
+        s.put("y", 1d);
         System.out.println(f.execute(s)); // -25
 
 
         f.prepare("-x*y*y/y");
         s = new HashMap<>();
-        s.put("x", 1d); s.put("y", 25d);
+        s.put("x", 1d);
+        s.put("y", 25d);
         System.out.println(f.execute(s)); // -25
 
         f.prepare("-x*y*y/y");
         s = new HashMap<>();
-        s.put("x", 0d); s.put("y", 25d);
+        s.put("x", 0d);
+        s.put("y", 25d);
         System.out.println(f.execute(s)); // 0
 
 
         Formula fNotX = new Formula();
         fNotX.prepare("-x/y");
         s = new HashMap<>();
-        s.put("x", 1d); s.put("y", 4d);
+        s.put("x", 1d);
+        s.put("y", 4d);
         System.out.println(fNotX.execute(1d, 4d)); // -0.25
     }
 }
